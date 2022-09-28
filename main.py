@@ -34,7 +34,7 @@ class Ship:
     self.cool_down_counter = 0
 
   def draw(self, window):
-    window.blit(self.ship_img, self.x, self.y)
+    window.blit(self.ship_img, (self.x, self.y))
 
 class Player(Ship):
   def __init__(self, x, y, health = 100):
