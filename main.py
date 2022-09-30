@@ -1,5 +1,6 @@
 import pygame
 import os
+import time
 import random
 
 pygame.font.init()
@@ -83,6 +84,7 @@ def main():
   clock = pygame.time.Clock()
 
   lost = False
+  lost_count = 0
   
   def redraw_window():
     WIN.blit(BG, (0, 0))
@@ -100,15 +102,23 @@ def main():
 
     if lost:
       lost_label = lost_font.render("You Lost!!", 1, (255,255,255))
-      WIN.blit(lost_label, (WIDTH/2 - lost_label.get_width()/2), 350)
+      WIN.blit(lost_label, (WIDTH/2 - lost_label.get_width()/2, 350))
 
     pygame.display.update()
 
   while run:
     clock.tick(FPS)
+    redraw_window()
 
     if lives <= 0 or player.health <= 0:
       lost = True
+      lost_count += 1
+
+    if lost:
+      if lost_count > FPS * 3:
+        run = False
+      else:
+        continue # restart loop early
 
     if len(enemies) == 0:
       level += 1
@@ -136,7 +146,5 @@ def main():
       if enemy.y + enemy.get_height() > HEIGHT:
         lives -= 1
         enemies.remove(enemy)
-
-    redraw_window()
 
 main()
