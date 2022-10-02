@@ -1,4 +1,3 @@
-from turtle import title
 import pygame
 import os
 import time
@@ -6,7 +5,7 @@ import random
 
 pygame.font.init()
 
-WIDTH, HEIGHT = 800, 750
+WIDTH, HEIGHT = 750, 750
 WIN = pygame.display.set_mode((WIDTH, HEIGHT))
 pygame.display.set_caption("Space Shooter")
 
@@ -140,7 +139,7 @@ class Enemy(Ship):
 
 def collide(obj1, obj2):
   offset_x = obj2.x - obj1.x
-  offset_y = obj2.y - obj2.y
+  offset_y = obj2.y - obj1.y
   return obj1.mask.overlap(obj2.mask, (offset_x, offset_y)) != None
 
 def main():
@@ -158,7 +157,7 @@ def main():
   player_vel = 5
   laser_vel = 5
 
-  player = Player(300, 650)
+  player = Player(300, 630)
 
   clock = pygame.time.Clock()
 
