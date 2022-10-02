@@ -1,3 +1,4 @@
+from turtle import title
 import pygame
 import os
 import time
@@ -206,7 +207,7 @@ def main():
 
     for event in pygame.event.get():
       if event.type == pygame.QUIT:
-        run = False
+        quit()
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_a] and player.x - player_vel > 0:
@@ -236,4 +237,19 @@ def main():
 
     player.move_lasers(-laser_vel, enemies)
 
-main()
+def main_menu():
+  title_font = pygame.font.SysFont("comicsans", 50)
+  run = True
+  while run:
+    WIN.blit(BG, (0,0))
+    title_label = title_font.render("Press the mouse to begin...", 1, (255,255,255))
+    WIN.blit(title_label, (WIDTH / 2 - title_label.get_width()/2, 350))
+    pygame.display.update()
+    for event in pygame.event.get():
+      if event.type == pygame.QUIT:
+        run = False
+      if event.type == pygame.MOUSEBUTTONDOWN:
+        main()
+  pygame.quit()
+
+main_menu()
