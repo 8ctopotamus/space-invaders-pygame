@@ -106,7 +106,8 @@ class Player(Ship):
         for obj in objs:
           if laser.collision(obj):
             objs.remove(obj)
-            self.lasers.remove(laser)
+            if laser in self.lasers:
+              self.lasers.remove(laser)
 
   def draw(self, window):
     super().draw(window)
